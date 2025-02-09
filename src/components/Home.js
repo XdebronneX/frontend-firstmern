@@ -82,7 +82,7 @@ import MetaData from "./layout/MetaData";
 import Product from "./product/Product";
 import Loader from "./layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../actions/productActions";
+import { getProducts, clearErrors } from "../actions/productActions";
 import { toast } from 'react-toastify';
 
 const Home = () => {
@@ -99,6 +99,7 @@ const Home = () => {
         dispatch(getProducts(category === "All" ? "" : category));
         if (error) {
             notify(error);
+            dispatch(clearErrors());
         }
     }, [dispatch, error, category]);
 

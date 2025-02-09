@@ -151,15 +151,10 @@ const Login = () => {
     dispatch(login(data.email, data.password));
   };
 
-   const errMsg = (message = "") =>
-     toast.error(message, {
-       position: 'bottom-right',
-     });
- 
-   const successMsg = (message = "") =>
-     toast.success(message, {
-       position: 'bottom-right',
-     });
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
 
 
   useEffect(() => {
@@ -167,7 +162,6 @@ const Login = () => {
       navigate(`/${redirect}`, { replace: true });
     } else if (isAuthenticated)
       navigate("/");
-    successMsg("Welcome enjoy shopping!")
     if (error) {
       errMsg(error);
       dispatch(clearErrors());
