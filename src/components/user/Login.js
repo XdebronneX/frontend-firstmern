@@ -129,9 +129,9 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../actions/userActions"; // GoogleLogin add GoogleReactLogin
-import Loader from "../layout/Loader";
+import { toast } from "react-toastify";
 import MetaData from "../layout/MetaData";
-import "react-toastify/dist/ReactToastify.css";
+
 
 const Login = () => {
   const {
@@ -151,13 +151,26 @@ const Login = () => {
     dispatch(login(data.email, data.password));
   };
 
+  const success = (message = "") =>
+      toast.success(message, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+  
+    const notify = (error = "") =>
+      toast.error(error, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+  
+
   useEffect(() => {
     if (isAuthenticated && redirect === "shipping") {
       navigate(`/${redirect}`, { replace: true });
     } else if (isAuthenticated)
+      success("Welcome enjoy our website!");
       navigate("/");
 
     if (error) {
+      notify(error);
       dispatch(clearErrors());
     }
 

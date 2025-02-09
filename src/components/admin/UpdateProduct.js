@@ -112,7 +112,8 @@ const UpdateProduct = () => {
   // };
 
   const onChange = (e) => {
-    const files = Array.from(e.target.files); // Assuming e is a valid event object.
+    console.log(e); // Inspect the event object
+    const files = Array.from(e.target.files); // Ensure e is a valid event object
     setImagesPreview([]);
     setImages([]);
     setOldImages([]);
@@ -127,6 +128,7 @@ const UpdateProduct = () => {
       reader.readAsDataURL(file);
     });
   };
+
 
   return (
     <Fragment>
