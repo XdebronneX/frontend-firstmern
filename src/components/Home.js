@@ -88,18 +88,17 @@ import { toast } from 'react-toastify';
 const Home = () => {
     const dispatch = useDispatch();
     const { loading, products, error } = useSelector((state) => state.products);
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(''); 
     const categories = ["All", "Nike", "Adidas", "Converse", "Vans", "Reebok", "Puma", "Jordan"];
 
-    const errMsg = (message = "") =>
-        toast.error(message, {
-            position: 'bottom-right',
-        });
+    const notify = (message = '') => toast.error(message, {
+        position: toast.POSITION.BOTTOM_CENTER
+    });
 
     useEffect(() => {
         dispatch(getProducts(category === "All" ? "" : category));
         if (error) {
-            errMsg(error);
+            notify(error);
         }
     }, [dispatch, error, category]);
 
@@ -129,15 +128,15 @@ const Home = () => {
                         </div>
 
                         {/* Product Listings */}
-                        <div className="row">
-                            {products && products.length > 0 ? (
-                                products.map((product) => (
-                                    <Product key={product._id} product={product} col={4} />
-                                ))
-                            ) : (
-                                <div className="no-products">No products available</div>
-                            )}
-                        </div>
+                            <div className="row">
+                                {products && products.length > 0 ? (
+                                    products.map((product) => (
+                                        <Product key={product._id} product={product} col={4} />
+                                    ))
+                                ) : (
+                                    <div className="no-products">No products available</div>
+                                )}
+                            </div>
 
                     </section>
                 </Fragment>
