@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import Header from "./components/layout/Header";
+import Header from "./components/layout/Header";
 import Header from "./components/layout/Header"
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
-// import Login from "./components/user/Login";
+import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import { loadUser } from "./actions/userActions";
 import { useSelector } from "react-redux";
@@ -40,7 +40,6 @@ import UsersList from "./components/admin/UsersList";
 import UpdateUser from "./components/admin/UpdateUser";
 import ProductReviews from "./components/admin/ProductReviews";
 import SellerProductReviews from "./components/seller/ProductReviews";
-import Login from "./components/user/Login";
 
 function App() {
   useEffect(() => {

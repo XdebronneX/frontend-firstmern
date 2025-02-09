@@ -164,9 +164,9 @@ const Login = () => {
     }, [dispatch, isAuthenticated, error, navigate, redirect]);
   return (
     <Fragment>
-      {loading ? (
+      {/* {loading ? (
         <Loader />
-      ) : (
+      ) : ( */}
         <Fragment>
           <MetaData title={"Login"} />
 
@@ -245,7 +245,7 @@ const Login = () => {
             </div>
           </div>
         </Fragment>
-      )}
+      {/* )} */}
     </Fragment>
   );
 };
