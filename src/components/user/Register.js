@@ -171,9 +171,8 @@ const Register = () => {
               id="register_button"
               type="submit"
               className="btn btn-block py-3"
-              disabled={loading ? true : false}
             >
-              Signup
+              Register
             </button>
               <br/>
             <div style={{ display: "flex", alignItems: "center" }}>
