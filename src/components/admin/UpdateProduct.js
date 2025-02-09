@@ -94,8 +94,25 @@ const UpdateProduct = () => {
     dispatch(updateProduct(product._id, formData));
   };
 
+  // const onChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   setImagesPreview([]);
+  //   setImages([]);
+  //   setOldImages([]);
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setImagesPreview((oldArray) => [...oldArray, reader.result]);
+  //         setImages((oldArray) => [...oldArray,  reader.result]);
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
+
   const onChange = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files); // Assuming e is a valid event object.
     setImagesPreview([]);
     setImages([]);
     setOldImages([]);
@@ -104,7 +121,7 @@ const UpdateProduct = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setImagesPreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray,  reader.result]);
+          setImages((oldArray) => [...oldArray, reader.result]);
         }
       };
       reader.readAsDataURL(file);
