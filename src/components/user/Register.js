@@ -174,24 +174,6 @@ const Register = () => {
             >
               Register
             </button>
-              <br/>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <hr
-                style={{
-                  flexGrow: 1,
-                  border: "none",
-                  borderTop: "1px solid black",
-                }}
-              />
-              <div
-                style={{
-                  padding: "0 10px",
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                }}>
-                or
-              </div>
-            </div>
           </form>
         </div>
       </div>
