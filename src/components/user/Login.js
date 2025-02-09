@@ -131,7 +131,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../actions/userActions"; // GoogleLogin add GoogleReactLogin
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -151,13 +151,23 @@ const Login = () => {
     dispatch(login(data.email, data.password));
   };
 
+  const success = (message = '') => toast.success(message, {
+          position: toast.POSITION.BOTTOM_CENTER
+      });
+
+  const errMessage = (message = '') => toast.error(message, {
+    position: toast.POSITION.BOTTOM_CENTER
+  });
+
+
   useEffect(() => {
     if (isAuthenticated && redirect === "shipping") {
       navigate(`/${redirect}`, { replace: true });
     } else if (isAuthenticated)
       navigate("/");
-
+      success("Welcome enjoy shopping!")
     if (error) {
+      errMessage(error);
       dispatch(clearErrors());
     }
 
