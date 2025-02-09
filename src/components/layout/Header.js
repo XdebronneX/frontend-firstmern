@@ -8,10 +8,15 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const { cartItems } = useSelector(state => state.cart);
+  
+const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
 
   const logoutHandler = () => {
     dispatch(logout());
-    toast.success('Logged out successfully.');
+    successMsg('Logged out successfully.');
   };
 
   return (
