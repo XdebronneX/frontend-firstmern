@@ -191,7 +191,7 @@ const ProductDetails = () => {
               <p>{product.description}</p>
               <hr />
               <p id="product_seller mb-3">
-                Sold by: <strong>{product.user}</strong>
+                Seller: <strong>{product.user.name}</strong>
               </p>
               {user ? (
                 <button
