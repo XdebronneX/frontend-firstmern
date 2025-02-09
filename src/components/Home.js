@@ -84,25 +84,22 @@ import Loader from "./layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../actions/productActions";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
     const dispatch = useDispatch();
     const { loading, products, error } = useSelector((state) => state.products);
-
-    const [category, setCategory] = useState('');  // Category Filter
-
-    // Include "All" category to show all products
+    const [category, setCategory] = useState('');
     const categories = ["All", "Nike", "Adidas", "Converse", "Vans", "Reebok", "Puma", "Jordan"];
 
-    const notify = (message = '') => toast.error(message, {
-        position: toast.POSITION.BOTTOM_CENTER
-    });
+    const errMsg = (message = "") =>
+        toast.error(message, {
+            position: 'bottom-right',
+        });
 
     useEffect(() => {
-        dispatch(getProducts(category === "All" ? "" : category)); // Fetch all products if "All" is selected
+        dispatch(getProducts(category === "All" ? "" : category));
         if (error) {
-            notify(error);
+            errMsg(error);
         }
     }, [dispatch, error, category]);
 
@@ -132,15 +129,15 @@ const Home = () => {
                         </div>
 
                         {/* Product Listings */}
-                            <div className="row">
-                                {products && products.length > 0 ? (
-                                    products.map((product) => (
-                                        <Product key={product._id} product={product} col={4} />
-                                    ))
-                                ) : (
-                                    <div className="no-products">No products available</div>
-                                )}
-                            </div>
+                        <div className="row">
+                            {products && products.length > 0 ? (
+                                products.map((product) => (
+                                    <Product key={product._id} product={product} col={4} />
+                                ))
+                            ) : (
+                                <div className="no-products">No products available</div>
+                            )}
+                        </div>
 
                     </section>
                 </Fragment>

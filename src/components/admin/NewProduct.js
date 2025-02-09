@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
@@ -25,19 +24,25 @@ const NewProduct = () => {
   let navigate = useNavigate();
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
-  const message = (message = "") =>
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
     toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
 
   useEffect(() => {
     if (error) {
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (success) {
       navigate("/admin/products");
-      message("Product created successfully");
+      successMsg("Product created successfully");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, error, success, navigate]);
@@ -99,9 +104,8 @@ const NewProduct = () => {
                       <input
                         type="text"
                         id="name_field"
-                        className={`form-control ${
-                          errors.name ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.name ? "is-invalid" : ""
+                          }`}
                         {...register("name", { required: true })}
                       />
                       {errors.name && (
@@ -113,9 +117,8 @@ const NewProduct = () => {
                       <input
                         type="number"
                         id="price_field"
-                        className={`form-control ${
-                          errors.price ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.price ? "is-invalid" : ""
+                          }`}
                         {...register("price", { required: true, min: 1 })}
                       />
                       {errors.price && (
@@ -127,9 +130,8 @@ const NewProduct = () => {
                     <div className="form-group">
                       <label htmlFor="description_field">Description</label>
                       <textarea
-                        className={`form-control ${
-                          errors.description ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.description ? "is-invalid" : ""
+                          }`}
                         id="description_field"
                         rows="8"
                         {...register("description", { required: true })}
@@ -143,9 +145,8 @@ const NewProduct = () => {
                     <div className="form-group">
                       <label htmlFor="category_field">Category</label>
                       <select
-                        className={`form-control ${
-                          errors.category ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.category ? "is-invalid" : ""
+                          }`}
                         id="category_field"
                         {...register("category", { required: true })}
                       >
@@ -167,9 +168,8 @@ const NewProduct = () => {
                       <input
                         type="number"
                         id="stock_field"
-                        className={`form-control ${
-                          errors.stock ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.stock ? "is-invalid" : ""
+                          }`}
                         {...register("stock", { required: true, min: 0 })}
                       />
                       {errors.stock && (
@@ -184,9 +184,8 @@ const NewProduct = () => {
                         <input
                           type="file"
                           name="images"
-                          className={`custom-file-input ${
-                            errors.images ? "is-invalid" : ""
-                          }`}
+                          className={`custom-file-input ${errors.images ? "is-invalid" : ""
+                            }`}
                           id="customFile"
                           onChange={onChange}
                           multiple

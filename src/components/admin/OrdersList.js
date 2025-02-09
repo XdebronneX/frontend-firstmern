@@ -5,7 +5,6 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import Sidebar from "./Sidebar";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -21,11 +20,12 @@ const OrdersList = () => {
   const { isDeleted } = useSelector((state) => state.order);
   const errMsg = (message = "") =>
     toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
+
   const successMsg = (message = "") =>
     toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
   useEffect(() => {
     dispatch(allOrders());
@@ -34,11 +34,11 @@ const OrdersList = () => {
       dispatch(clearErrors());
     }
     if (isDeleted) {
-        successMsg('Order deleted successfully');
-        navigate('/admin/orders');
-        dispatch({ type: DELETE_ORDER_RESET })
+      successMsg('Order deleted successfully');
+      navigate('/admin/orders');
+      dispatch({ type: DELETE_ORDER_RESET })
     }
-      }, [dispatch, error, navigate, isDeleted]);
+  }, [dispatch, error, navigate, isDeleted]);
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
@@ -82,7 +82,7 @@ const OrdersList = () => {
         amount: `$${order.totalPrice}`,
         status:
           order.orderStatus &&
-          String(order.orderStatus).includes("Delivered") ? (
+            String(order.orderStatus).includes("Delivered") ? (
             <p style={{ color: "green" }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: "red" }}>{order.orderStatus}</p>

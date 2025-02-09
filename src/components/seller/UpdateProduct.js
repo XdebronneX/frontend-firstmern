@@ -34,15 +34,16 @@ const UpdateProduct = () => {
   );
   let { id } = useParams();
   let navigate = useNavigate();
+
   const errMsg = (message = "") =>
     toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-  const successMsg = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
 
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
   const {
     register,
     handleSubmit,
@@ -104,7 +105,7 @@ const UpdateProduct = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setImagesPreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray,  reader.result]);
+          setImages((oldArray) => [...oldArray, reader.result]);
         }
       };
       reader.readAsDataURL(file);
@@ -119,10 +120,10 @@ const UpdateProduct = () => {
           <Sidebar />
         </div>
         <div className="col-12 col-md-10">
-        <Fragment>
-          <div className="wrapper my-5">
-              <form onSubmit={handleSubmit(onSubmit)}  className="shadow-lg" encType="multipart/form-data">
-              <h1 className="mb-4">Update Product</h1>
+          <Fragment>
+            <div className="wrapper my-5">
+              <form onSubmit={handleSubmit(onSubmit)} className="shadow-lg" encType="multipart/form-data">
+                <h1 className="mb-4">Update Product</h1>
                 <div className="form-group">
                   <label htmlFor="name_field">Name</label>
                   <input
@@ -199,7 +200,7 @@ const UpdateProduct = () => {
                   )}
                 </div>
                 <div className="form-group">
-                <label>Images</label>
+                  <label>Images</label>
                   <div className="custom-file">
                     <input
                       type="file"
@@ -218,7 +219,7 @@ const UpdateProduct = () => {
                 {imagesPreview.map((image) => (
                   <div key={image} className="image-preview">
                     <img src={image} alt="Preview" width="55"
-                          height="52"/>
+                      height="52" />
                   </div>
                 ))}
                 <button

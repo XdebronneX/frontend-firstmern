@@ -1,54 +1,38 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import MetaData from "../layout/MetaData";
-
 import { toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { updatePassword, clearErrors } from "../../actions/userActions";
-
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 
 const UpdatePassword = () => {
-  const [oldPassword, setOldPassword] = useState("");
-
-  const [password, setPassword] = useState("");
-
   const dispatch = useDispatch();
-
   let navigate = useNavigate();
 
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
   const { error, isUpdated, loading } = useSelector((state) => state.user);
 
-  const success = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
     });
 
-  const notify = (error = "") =>
-    toast.error(error, {
-      position: toast.POSITION.BOTTOM_CENTER,
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
     });
 
   useEffect(() => {
     if (error) {
-      console.log(error);
-
-      notify(error);
-
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      success("Password updated successfully");
-
+      successMsg("Password updated successfully");
       navigate("/me");
-
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });

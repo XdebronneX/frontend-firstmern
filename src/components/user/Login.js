@@ -151,14 +151,14 @@ const Login = () => {
     dispatch(login(data.email, data.password));
   };
 
-  const success = (message = "") =>
-      toast.success(message, {
-        position: toast.POSITION.BOTTOM_CENTER,
+  const errMsg = (message = "") =>
+      toast.error(message, {
+        position: 'bottom-right',
       });
   
-    const notify = (error = "") =>
-      toast.error(error, {
-        position: toast.POSITION.BOTTOM_CENTER,
+    const successMsg = (message = "") =>
+      toast.success(message, {
+        position: 'bottom-right',
       });
   
 
@@ -166,11 +166,11 @@ const Login = () => {
     if (isAuthenticated && redirect === "shipping") {
       navigate(`/${redirect}`, { replace: true });
     } else if (isAuthenticated)
-      success("Welcome enjoy our website!");
+      successMsg("Welcome enjoy our website!");
       navigate("/");
 
     if (error) {
-      notify(error);
+      errMsg(error);
       dispatch(clearErrors());
     }
 

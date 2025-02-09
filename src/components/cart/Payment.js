@@ -1,43 +1,34 @@
 import React, { Fragment, useEffect } from 'react'
-
 import { useNavigate } from 'react-router-dom'
-
 import MetaData from '../layout/MetaData'
-
 import CheckoutSteps from './CheckoutSteps'
-
-// import { useAlert } from 'react-alert'
-
 import { useDispatch, useSelector } from 'react-redux'
-
 import { createOrder, clearErrors } from '../../actions/orderActions'
-
 import { clearCart } from '../../actions/cartActions'
+import { toast } from 'react-toastify'
 
 const Payment = () => {
-//   const alert = use  ()
-
   const dispatch = useDispatch()
-
   let navigate = useNavigate()
-
-  // const { user } = useSelector(state => state.auth)
 
   const { cartItems, shippingInfo } = useSelector(state => state.cart)
 
   const { error } = useSelector(state => state.newOrder)
 
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
   useEffect(() => {
     if (error) {
-    //   alert.error(error)
-
+      errMsg(error)
       dispatch(clearErrors())
     }
   }, [dispatch, error])
 
   const order = {
     orderItems: cartItems,
-
     shippingInfo
   }
 
@@ -45,28 +36,20 @@ const Payment = () => {
 
   if (orderInfo) {
     order.itemsPrice = orderInfo.itemsPrice
-
     order.shippingPrice = orderInfo.shippingPrice
-
     order.taxPrice = orderInfo.taxPrice
-
     order.totalPrice = orderInfo.totalPrice
   }
 
   const submitHandler = async e => {
     e.preventDefault()
-
     document.querySelector('#pay_btn').disabled = true
-
     order.paymentInfo = {
       id: 'pi_1DpdYh2eZvKYlo2CYIynhU32',
-
       status: 'succeeded'
     }
-
     dispatch(createOrder(order))
     dispatch(clearCart())
-
     navigate('/success')
   }
 

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 const CheckoutSteps = ({
   shipping,
   confirmOrder, payment
-  // , confirmOrder, payment
 }) => {
   return (
     <div className='checkout-progress d-flex justify-content-center mt-5'>
@@ -43,35 +42,23 @@ const CheckoutSteps = ({
         </Link>
       )}
 
-      {/* <div className='triangle2-incomplete'></div>
-
-      <div className='step incomplete'>Confirm Order</div>
-
-      <div className='triangle-incomplete'></div> */}
-
       {payment ? <Link to='/payment' className="float-right">
 
-                <div className="triangle2-active"></div>
+        <div className="triangle2-active"></div>
 
-                <div className="step active-step">Payment</div>
+        <div className="step active-step">Payment</div>
 
-                <div className="triangle-active"></div>
+        <div className="triangle-active"></div>
 
-            </Link> : <Link to="#!" disabled>
+      </Link> : <Link to="#!" disabled>
 
-                <div className="triangle2-incomplete"></div>
+        <div className="triangle2-incomplete"></div>
 
-                <div className="step incomplete">Payment</div>
+        <div className="step incomplete">Payment</div>
 
-                <div className="triangle-incomplete"></div>
+        <div className="triangle-incomplete"></div>
 
-            </Link>}
-{/* 
-      <div className='triangle2-incomplete'></div>
-
-      <div className='step incomplete'>Payment</div>
-
-      <div className='triangle-incomplete'></div> */}
+      </Link>}
     </div>
   )
 }

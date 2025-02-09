@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
@@ -25,19 +24,25 @@ const NewProduct = () => {
   let navigate = useNavigate();
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
-  const message = (message = "") =>
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
     toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
 
   useEffect(() => {
     if (error) {
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (success) {
       navigate("/seller/products");
-      message("Product created successfully");
+      successMsg("Product created successfully");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, error, success, navigate]);

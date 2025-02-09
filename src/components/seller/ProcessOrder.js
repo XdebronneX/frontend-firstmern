@@ -2,21 +2,14 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
-
 import Sidebar from "./Sidebar";
-
 import { toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   getOrderDetails,
   updateOrder,
   clearErrors,
 } from "../../actions/orderActions";
-
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 
 const ProcessOrder = () => {
@@ -43,12 +36,12 @@ const ProcessOrder = () => {
 
   const errMsg = (message = "") =>
     toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
 
   const successMsg = (message = "") =>
     toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+      position: 'bottom-right',
     });
 
   useEffect(() => {
@@ -56,13 +49,11 @@ const ProcessOrder = () => {
 
     if (error) {
       errMsg(error);
-
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
       successMsg("Order updated successfully");
-
       dispatch({ type: UPDATE_ORDER_RESET });
     }
   }, [dispatch, error, isUpdated, orderId]);
@@ -138,7 +129,7 @@ const ProcessOrder = () => {
                   <p
                     className={
                       order.orderStatus &&
-                      String(order.orderStatus).includes("Delivered")
+                        String(order.orderStatus).includes("Delivered")
                         ? "greenColor"
                         : "redColor"
                     }

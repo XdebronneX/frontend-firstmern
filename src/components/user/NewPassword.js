@@ -1,49 +1,45 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import { useNavigate, useParams } from "react-router-dom";
-
 import MetaData from "../layout/MetaData";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { resetPassword, clearErrors } from "../../actions/userActions";
+import { toast } from "react-toastify";
 
 const NewPassword = () => {
-  const [password, setPassword] = useState("");
-
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const dispatch = useDispatch();
-
   let navigate = useNavigate();
-
+  let { token } = useParams();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { error, success } = useSelector((state) => state.forgotPassword);
 
-  let { token } = useParams();
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
-
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      // alert.success('Password updated successfully')
-
+      successMsg('Password updated successfully')
       navigate("/login");
     }
   }, [dispatch, error, success, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
     formData.set("password", password);
-
     formData.set("confirmPassword", confirmPassword);
-
     dispatch(resetPassword(token, formData));
   };
 

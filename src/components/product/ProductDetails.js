@@ -28,19 +28,27 @@ const ProductDetails = () => {
   const { error: reviewError, success } = useSelector(
     (state) => state.newReview
   );
+
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
   useEffect(() => {
     dispatch(getProductDetails(id));
     if (error) {
-      notify(error);
+      errMsg(error);
       dispatch(clearErrors());
     }
-    //useeffect
     if (reviewError) {
-      notify(reviewError);
+      errMsg(reviewError);
       dispatch(clearErrors());
     }
     if (success) {
-      // alert.success("Reivew posted successfully");
       successMsg("Reivew posted successfully");
       dispatch({ type: NEW_REVIEW_RESET });
     }
@@ -61,15 +69,6 @@ const ProductDetails = () => {
     dispatch(addItemToCart(id, quantity));
     toast.success('Item Added to Cart')
   };
-  const successMsg = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-
-  const notify = (error = "") =>
-    toast.error(error, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
   const reviewHandler = () => {
     const formData = new FormData();
     formData.set("rating", rating);
@@ -81,7 +80,7 @@ const ProductDetails = () => {
     const stars = document.querySelectorAll(".star");
     stars.forEach((star, index) => {
       star.starValue = index + 1;
-      ["click", "mouseover", "mouseout"].forEach(function(e) {
+      ["click", "mouseover", "mouseout"].forEach(function (e) {
         star.addEventListener(e, showRatings);
       });
     });

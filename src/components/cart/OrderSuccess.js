@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react'
-
 import { Link } from 'react-router-dom'
-
 import MetaData from '../layout/MetaData'
 
 const OrderSuccess = () => {
-    sessionStorage.clear();
-    localStorage.clear();
+  sessionStorage.clear();
+  localStorage.clear();
   return (
     <Fragment>
       <MetaData title={'Order Success'} />

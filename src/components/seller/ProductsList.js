@@ -1,32 +1,20 @@
 import React, { Fragment, useEffect } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import { MDBDataTable } from "mdbreact";
-
 import MetaData from "../layout/MetaData";
-
 import Loader from "../layout/Loader";
-
 import Sidebar from "./Sidebar";
-
-// import { useAlert } from "react-alert";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   getSellerProducts,
   deleteProduct,
   clearErrors,
 } from "../../actions/productActions";
-
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+import { toast } from "react-toastify";
 
 const ProductsList = () => {
-  //   const alert = useAlert();
-
   const dispatch = useDispatch();
-
   let navigate = useNavigate();
 
   const { loading, error, products } = useSelector((state) => state.products);
@@ -35,24 +23,32 @@ const ProductsList = () => {
     (state) => state.product
   );
 
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
+
   useEffect(() => {
     dispatch(getSellerProducts());
 
     if (error) {
+      errMsg(error)
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      // alert.error(deleteError);
-
+      errMsg(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success("Product deleted successfully");
-
+      successMsg("Product deleted successfully");
       navigate("/admin/products");
-
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
   }, [dispatch, error, navigate, isDeleted, deleteError]);

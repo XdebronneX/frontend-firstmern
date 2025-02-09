@@ -1,56 +1,35 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import { MDBDataTable } from "mdbreact";
-
 import MetaData from "../layout/MetaData";
-
-// import Loader from "../layout/Loader";
-import Toast from '../layout/Toast'
-// import Swal from 'sweetalert2'
+import { toast } from "react-toastify";
 import Sidebar from "./Sidebar";
-
-// import { useAlert } from "react-alert";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { getProductReviews, clearErrors } from '../../actions/productActions'
-
-// import { getProductReviews, clearErrors } from "../../actions/productActions";
-
-// import { DELETE_REVIEW_RESET } from '../../constants/productConstants'
 
 const ProductReviews = () => {
   const [productId, setProductId] = useState("");
-
-//   const alert = useAlert();
-
   const dispatch = useDispatch();
-
   const { error, reviews } = useSelector((state) => state.productReviews);
-
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
 
   useEffect(() => {
     if (error) {
-        Toast('error fetching reviews', 'error')
-        dispatch(clearErrors())
+      errMsg('Error fetching reviews')
+      dispatch(clearErrors())
     }
 
     if (productId !== '') {
-        dispatch(getProductReviews(productId))
+      dispatch(getProductReviews(productId))
     }
 
-    // }, [dispatch, alert, error, productId, isDeleted, deleteError])
-}, [dispatch, error, productId  ])
+  }, [dispatch, error, productId])
 
-  // const deleteReviewHandler = (id) => {
-
-  //     dispatch(deleteReview(id, productId))
-
-  // }
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     dispatch(getProductReviews(productId));
   };
 

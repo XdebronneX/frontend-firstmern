@@ -20,14 +20,16 @@ const UpdateUser = () => {
   const { error, isUpdated } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.userDetails);
   const { id } = useParams();
-  const errMsg = (message = "") =>
-    toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-  const successMsg = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
+
+   const errMsg = (message = "") =>
+      toast.error(message, {
+        position: 'bottom-right',
+      });
+  
+    const successMsg = (message = "") =>
+      toast.success(message, {
+        position: 'bottom-right',
+      });
   useEffect(() => {
     // console.log(user && user._id !== userId);
     if (user && user._id !== id) {

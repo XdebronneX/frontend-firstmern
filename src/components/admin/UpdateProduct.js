@@ -14,7 +14,7 @@ import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useForm } from "react-hook-form";
 
 const UpdateProduct = () => {
-  const [setOldImages] = useState([]);
+  const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [images, setImages] = useState([]);
   const categories = [
@@ -34,14 +34,17 @@ const UpdateProduct = () => {
   );
   let { id } = useParams();
   let navigate = useNavigate();
-  const errMsg = (message = "") =>
-    toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-  const successMsg = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
+
+   const errMsg = (message = "") =>
+      toast.error(message, {
+        position: 'bottom-right',
+      });
+  
+    const successMsg = (message = "") =>
+      toast.success(message, {
+        position: 'bottom-right',
+      });
+
 
   const {
     register,
@@ -94,26 +97,8 @@ const UpdateProduct = () => {
     dispatch(updateProduct(product._id, formData));
   };
 
-  // const onChange = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   setImagesPreview([]);
-  //   setImages([]);
-  //   setOldImages([]);
-  //   files.forEach((file) => {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setImagesPreview((oldArray) => [...oldArray, reader.result]);
-  //         setImages((oldArray) => [...oldArray,  reader.result]);
-  //       }
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  // };
-
   const onChange = (e) => {
-    console.log(e); // Inspect the event object
-    const files = Array.from(e.target.files); // Ensure e is a valid event object
+    const files = Array.from(e.target.files);
     setImagesPreview([]);
     setImages([]);
     setOldImages([]);
@@ -122,7 +107,7 @@ const UpdateProduct = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setImagesPreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray, reader.result]);
+          setImages((oldArray) => [...oldArray,  reader.result]);
         }
       };
       reader.readAsDataURL(file);
@@ -243,10 +228,11 @@ const UpdateProduct = () => {
                 <button
                   type="submit"
                   className="btn btn-update"
-                  disabled={loading ? true : false}
+                  disabled={loading}
                 >
-                  Update
+                  {loading ? "Updating..." : "Update"}
                 </button>
+
               </form>
             </div>
           </Fragment>

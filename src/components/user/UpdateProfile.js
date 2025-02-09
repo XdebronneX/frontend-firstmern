@@ -1,64 +1,55 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import MetaData from "../layout/MetaData";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
-
 import {
   updateProfile,
   loadUser,
   clearErrors,
 } from "../../actions/userActions";
-
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
+import { toast } from "react-toastify";
 
 const UpdateProfile = () => {
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [name, setName] = useState("");
-
   const [email, setEmail] = useState("");
-
   const [avatar, setAvatar] = useState("");
-
   const [avatarPreview, setAvatarPreview] = useState(
     "/images/default_avatar.jpg"
   );
 
-  const dispatch = useDispatch();
-
-  let navigate = useNavigate();
-
   const { user } = useSelector((state) => state.auth);
-
   const { error, isUpdated, loading } = useSelector((state) => state.user);
 
-  // console.log(error)
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
 
   useEffect(() => {
-    console.log(isUpdated);
-
     if (user) {
       setName(user.name);
-
       setEmail(user.email);
-
       setAvatarPreview(user.avatar.url);
     }
 
     if (error) {
-      // alert.error(error);
-
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success('User updated successfully')
-
+      successMsg('User updated successfully')
       dispatch(loadUser());
-
       navigate("/me", { replace: true });
-
       dispatch({
         type: UPDATE_PROFILE_RESET,
       });
@@ -67,15 +58,10 @@ const UpdateProfile = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
     formData.set("name", name);
-
     formData.set("email", email);
-
     formData.set("avatar", avatar);
-
     dispatch(updateProfile(formData));
   };
 
@@ -85,7 +71,6 @@ const UpdateProfile = () => {
     reader.onload = () => {
       if (reader.readyState === 2) {
         setAvatarPreview(reader.result);
-
         setAvatar(reader.result);
       }
     };

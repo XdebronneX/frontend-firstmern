@@ -1,26 +1,25 @@
 import React, { Fragment, useEffect } from 'react'
-
 import { Link } from 'react-router-dom'
-
 import { MDBDataTable } from 'mdbreact'
-
 import MetaData from '../layout/MetaData'
-
 import Loader from '../layout/Loader'
-
 import { useDispatch, useSelector } from 'react-redux'
-
 import { myOrders, clearErrors } from '../../actions/orderActions'
-
+import { toast } from 'react-toastify'
 const ListOrders = () => {
   const dispatch = useDispatch()
 
   const { loading, error, orders } = useSelector(state => state.myOrders)
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
 
   useEffect(() => {
     dispatch(myOrders())
 
     if (error) {
+      errMsg(error)
       dispatch(clearErrors())
     }
   }, [dispatch, error])
@@ -82,7 +81,7 @@ const ListOrders = () => {
 
         status:
           order.orderStatus &&
-          String(order.orderStatus).includes('Delivered') ? (
+            String(order.orderStatus).includes('Delivered') ? (
             <p style={{ color: 'green' }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: 'red' }}>{order.orderStatus}</p>

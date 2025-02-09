@@ -4,6 +4,7 @@ import MetaData from "../layout/MetaData";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { registers, clearErrors } from "../../actions/userActions";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -27,16 +28,26 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, error, loading } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
+
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
+    });
+
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
+    });
 
   useEffect(() => {
     if (isAuthenticated) {
+      successMsg("Welcome enjoy our website!");
       navigate("/");
     }
 
     if (error) {
+      errMsg(error)
       dispatch(clearErrors());
     }
 

@@ -7,7 +7,9 @@ import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
 
 
 const Cart = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+  
   const { cartItems } = useSelector(state => state.cart)
   const increaseQty = (id, quantity, stock) => {
     const newQty = quantity + 1
@@ -26,7 +28,7 @@ const Cart = () => {
     navigate('/login?redirect=shipping')
   }
   
-  let navigate = useNavigate()
+
 
   return (
     <Fragment>

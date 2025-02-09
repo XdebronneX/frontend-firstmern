@@ -1,21 +1,11 @@
 import React, { Fragment, useEffect } from "react";
-
 import { Link } from "react-router-dom";
-
 import { MDBDataTable } from "mdbreact";
-
 import MetaData from "../layout/MetaData";
-
 import Loader from "../layout/Loader";
-
 import Sidebar from "./Sidebar";
-
 import { toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   allSellerOrders,
   clearErrors,
@@ -26,19 +16,17 @@ const OrdersList = () => {
 
   const { loading, error, orders } = useSelector((state) => state.allOrders);
 
-  // const { isDeleted } = useSelector((state) => state.order);
-
   const errMsg = (message = "") =>
-    toast.error(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
+     toast.error(message, {
+       position: 'bottom-right',
+     });
+ 
 
   useEffect(() => {
     dispatch(allSellerOrders());
 
     if (error) {
       errMsg(error);
-
       dispatch(clearErrors());
     }
 

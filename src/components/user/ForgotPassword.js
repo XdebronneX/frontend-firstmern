@@ -1,53 +1,42 @@
 import React, { Fragment, useState, useEffect } from "react";
-
 import MetaData from "../layout/MetaData";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { toast } from "react-toastify";
-
-import "react-toastify/dist/ReactToastify.css";
-
 import { forgotPassword, clearErrors } from "../../actions/userActions";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-
   const dispatch = useDispatch();
 
   const { error, loading, message } = useSelector(
     (state) => state.forgotPassword
   );
 
-  const success = (message = "") =>
-    toast.success(message, {
-      position: toast.POSITION.BOTTOM_CENTER,
+  const errMsg = (message = "") =>
+    toast.error(message, {
+      position: 'bottom-right',
     });
 
-  const notify = (error = "") =>
-    toast.error(error, {
-      position: toast.POSITION.BOTTOM_CENTER,
+  const successMsg = (message = "") =>
+    toast.success(message, {
+      position: 'bottom-right',
     });
 
   useEffect(() => {
     if (error) {
-      notify(error);
-
+      errMsg(error);
       dispatch(clearErrors());
     }
 
     if (message) {
-      success(message);
+      successMsg(message);
     }
   }, [dispatch, error, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
     formData.set("email", email);
-
     dispatch(forgotPassword(formData));
   };
 
