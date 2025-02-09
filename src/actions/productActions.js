@@ -149,9 +149,7 @@ export const newProduct = (productData) => async (dispatch) => {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
     const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true
     };
     
@@ -194,16 +192,15 @@ export const deleteProduct = (id) => async (dispatch) => {
   }
 };
 
-// Update Product (ADMIN)
-
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
     const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true
     };
 
