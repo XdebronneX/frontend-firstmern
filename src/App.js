@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Header from "./components/layout/Header";
 import Header from "./components/layout/Header"
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
