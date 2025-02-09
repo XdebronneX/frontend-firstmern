@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^4.2.1",
     "axios": "^1.7.9",
     "countries-list": "^3.1.1",
     "cra-template": "1.2.0",
@@ -18,8 +19,8 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.3",
     "recharts": "^2.15.1",
-    "redux": "^4.2.1", 
-    "redux-devtools-extension": "^2.13.9", 
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "sweetalert2": "^11.16.0"
   },
