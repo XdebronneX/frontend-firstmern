@@ -151,23 +151,17 @@ const Login = () => {
     dispatch(login(data.email, data.password));
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (redirect) {
-        // if redirect is to shipping, go to the shipping page
+    useEffect(() => {
+      if (isAuthenticated && redirect === "shipping") {
         navigate(`/${redirect}`, { replace: true });
-      } else {
-        // Redirect to homepage or any default route
+      } else if (isAuthenticated) 
         navigate("/");
+
+      if (error) {
+        dispatch(clearErrors());
       }
-    }
 
-    // Clear errors if there is any
-    if (error) {
-      dispatch(clearErrors());
-    }
-  }, [dispatch, isAuthenticated, error, navigate, redirect]);
-
+    }, [dispatch, isAuthenticated, error, navigate, redirect]);
   return (
     <Fragment>
       {loading ? (
