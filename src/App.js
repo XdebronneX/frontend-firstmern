@@ -52,11 +52,11 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} exact="true" />
-        <Route path="/search/:keyword" element={<Home />} exact="true" />
-        <Route path="/product/:id" element={<ProductDetails />} exact="true" />
-        <Route path="/login" element={<Login />} exact="true" />
-        <Route path="/register" element={<Register />} exact="true" />
+        <Route path="/" element={<Home />}  />
+        <Route path="/search/:keyword" element={<Home />}  />
+        <Route path="/product/:id" element={<ProductDetails />}  />
+        <Route path="/login" element={<Login />}  />
+        <Route path="/register" element={<Register />}  />
 
         <Route
           path="/me"
@@ -74,7 +74,7 @@ function App() {
               <UpdateProfile />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
 
         <Route
@@ -84,19 +84,19 @@ function App() {
               <UpdatePassword />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
 
         <Route
           path="/password/forgot"
           element={<ForgotPassword />}
-          exact="true"
+          
         />
 
         <Route
           path="/password/reset/:token"
           element={<NewPassword />}
-          exact="true"
+          
         />
 
         <Route
@@ -106,7 +106,7 @@ function App() {
               <Shipping />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
 
         <Route
@@ -224,7 +224,7 @@ function App() {
               <OrdersList />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
         <Route
           path="/seller/orders"
@@ -233,7 +233,7 @@ function App() {
               <SellerOrdersList />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
         <Route
           path="/admin/order/:id"
@@ -274,7 +274,7 @@ function App() {
               <ProductReviews />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
         <Route
           path="/seller/reviews"
@@ -283,11 +283,11 @@ function App() {
               <SellerProductReviews />
             </ProtectedRoute>
           }
-          exact="true"
+          
         />
 
 
-        <Route path="/cart" element={<Cart />} exact="true" />
+        <Route path="/cart" element={<Cart />}  />
         {/* <Route path="/login" component={Login} /> */}
       </Routes>
       {!loading && (!isAuthenticated || user.role !== "admin") && <Footer />};
