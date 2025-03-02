@@ -190,9 +190,9 @@ const ProductDetails = () => {
               <h4 className="mt-2">Description:</h4>
               <p>{product.description}</p>
               <hr />
-              <p id="product_seller mb-3">
-                Seller: <strong>{product.user.name}</strong>
-              </p>
+                <p id="product_seller mb-3">
+                  Seller: <strong>{product.user ? product.user.name : "Unknown"}</strong>
+                </p>
               {user ? (
                 <button
                   id="review_btn"
