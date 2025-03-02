@@ -43,38 +43,6 @@ import {
 
 } from "../constants/userConstants";
 
-// export const login = (email, password) => async (dispatch) => {
-//   try {
-//     dispatch({ type: LOGIN_REQUEST });
-
-//     const config = {
-//       headers: { "Content-Type": "application/json" },
-//       withCredentials: true, // ✅ Ensure cookies are sent
-//     };
-
-//     // Send the login request
-//     const { data } = await axios.post(
-//       `${process.env.REACT_APP_API}/api/v1/login`,
-//       { email, password },
-//       config
-//     );
-
-//     // Dispatch login success action
-//     dispatch({
-//       type: LOGIN_SUCCESS,
-//       payload: data.user,
-//     });
-
-
-//     window.location.reload();
-//   } catch (error) {
-//     dispatch({
-//       type: LOGIN_FAIL,
-//       payload: error.response.data.errMessage || "Login failed",
-//     });
-//   }
-// };
-
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
@@ -98,10 +66,11 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response.data.errMessage || "Login failed",
+      payload: error.response?.data?.message || "Login failed",
     });
   }
 };
+
 
 export const registers = (userData) => async (dispatch) => {
   try {
@@ -125,7 +94,7 @@ export const registers = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
-      payload: error.response.data.errMessage || "Registration failed",
+      payload: error.response?.data?.message || "Registration failed",
     });
   }
 };
@@ -143,7 +112,7 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOAD_USER_FAIL,
-      payload: error.response.data.errMessage || "Error loading user",
+      payload: error.response?.data?.message || "Error loading user",
     });
   }
 };
@@ -157,7 +126,7 @@ export const logout = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGOUT_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Logout failed",
     });
   }
 };
@@ -184,7 +153,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Update profile failed",
     });
   }
 };
@@ -215,7 +184,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
     dispatch({
       type: UPDATE_PASSWORD_FAIL,
 
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Update password failed",
     });
   }
 };
@@ -242,7 +211,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     dispatch({
       type: FORGOT_PASSWORD_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Forgot password failed",
     });
   }
 };
@@ -273,7 +242,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     dispatch({
       type: NEW_PASSWORD_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Reset password failed" ,
     });
   }
 };
@@ -295,7 +264,7 @@ export const allUsers = () => async (dispatch) => {
     dispatch({
       type: ALL_USERS_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error loading users",
     });
   }
 };
@@ -328,7 +297,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     dispatch({
       type: UPDATE_USER_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Update user failed",
     });
   }
 };
@@ -348,7 +317,7 @@ export const getUserDetails = (id) => async (dispatch) => {
     dispatch({
       type: USER_DETAILS_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error loading user details",
     });
   }
 };
@@ -369,7 +338,7 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_USER_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Delete user failed",
     });
   }
 };
@@ -391,7 +360,7 @@ export const userSales = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_SALES_FAIL,
-      payload: error.response.data.message
+      payload: error.response?.data?.message || "Error loading user sales",
     })
   }
 }

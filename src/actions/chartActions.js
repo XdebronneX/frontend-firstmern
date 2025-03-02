@@ -17,7 +17,7 @@ export const monthlySalesChart = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: MONTHLY_SALES_FAIL,
-            payload: error.response.data.message
+            payload: error.response?.data?.message || "Error loading monthly sales",
         })
     }
 }
@@ -40,7 +40,7 @@ export const productSalesChart = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PRODUCT_SALES_FAIL,
-            payload: error.response.data.message
+            payload: error.response?.data?.message || "Error loading product sales",
         })
     }
 }

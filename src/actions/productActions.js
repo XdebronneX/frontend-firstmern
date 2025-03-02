@@ -54,7 +54,7 @@ export const getProducts = (category = '') => async (dispatch) => {
     // Dispatch fail action with error message
     dispatch({
       type: ALL_PRODUCTS_FAIL,
-      payload: error.response.data.errMessage,
+        payload: error.response?.data?.message || "Error loading products",
     });
   }
 };
@@ -72,7 +72,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
-      payload: error.response.data.errMessage,
+          payload: error.response?.data?.message || "Error loading product details",
     });
   }
 };
@@ -99,7 +99,7 @@ export const newReview = (reviewData) => async (dispatch) => {
     dispatch({
       type: NEW_REVIEW_FAIL,
 
-      payload: error.response.data.errMessage,
+        payload: error.response?.data?.message || "Error adding review",
     });
   }
 };
@@ -119,7 +119,7 @@ export const getAdminProducts = () => async (dispatch) => {
     dispatch({
       type: ADMIN_PRODUCTS_FAIL,
 
-      payload: error.response.data.errMessage,
+            payload: error.response?.data?.message || "Error loading admin products",
     });
   }
 };
@@ -139,7 +139,7 @@ export const getSellerProducts = () => async (dispatch) => {
     dispatch({
       type: SELLER_PRODUCTS_FAIL,
 
-      payload: error.response.data.errMessage,
+              payload: error.response?.data?.message || "Error loading seller products",
     });
   }
 };
@@ -167,7 +167,7 @@ export const newProduct = (productData) => async (dispatch) => {
     dispatch({
       type: NEW_PRODUCT_FAIL,
 
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Error adding product",
     });
   }
 };
@@ -187,7 +187,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_PRODUCT_FAIL,
 
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Error deleting product",
     });
   }
 };
@@ -219,7 +219,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     dispatch({
       type: UPDATE_PRODUCT_FAIL,
 
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Error updating product",
     });
   }
 };
@@ -240,7 +240,7 @@ export const getProductReviews = (id) => async (dispatch) => {
     dispatch({
       type: GET_REVIEWS_FAIL,
 
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Error loading product reviews",
     });
   }
 };
@@ -263,7 +263,7 @@ export const deleteReview = (id, productId) => async (dispatch) => {
 
     dispatch({
       type: DELETE_REVIEW_FAIL,
-      payload: error.response.data.errMessage,
+      payload: error.response?.data?.message || "Error deleting product review",
     });
   }
 };

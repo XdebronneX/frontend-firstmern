@@ -47,7 +47,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: CREATE_ORDER_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error creating order",
     });
   }
 };
@@ -75,7 +75,7 @@ export const myOrders = () => async (dispatch) => {
     dispatch({
       type: MY_ORDERS_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error loading orders",
     });
   }
 };
@@ -118,7 +118,7 @@ export const allOrders = () => async (dispatch) => {
     dispatch({
       type: ALL_ORDERS_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error loading orders",
     });
   }
 };
@@ -137,7 +137,7 @@ export const allSellerOrders = () => async (dispatch) => {
     dispatch({
       type: ALL_SELLER_ORDERS_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error loading seller orders",
     });
   }
 };
@@ -168,8 +168,8 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
     dispatch({
       type: UPDATE_ORDER_FAIL,
 
-      payload: error.response.data.message,
-    });
+      payload: error.response?.data?.message || "Error updating order",
+    }); 
   }
 };
 
@@ -188,7 +188,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_ORDER_FAIL,
 
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || "Error deleting order",
     });
   }
 };
