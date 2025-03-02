@@ -81,17 +81,15 @@ export const login = (email, password) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "application/json" },
-      withCredentials: true, // ✅ Ensure cookies are sent
+      withCredentials: true,
     };
 
-    // Send the login request
     const { data } = await axios.post(
       `${process.env.REACT_APP_API}/api/v1/login`,
       { email, password },
       config
     );
 
-    // Dispatch login success action
     dispatch({
       type: LOGIN_SUCCESS,
       payload: data.user,
