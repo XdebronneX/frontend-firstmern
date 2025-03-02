@@ -94,7 +94,7 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
-    // window.location.reload()
+
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,

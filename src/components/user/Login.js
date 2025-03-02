@@ -156,32 +156,17 @@ const Login = () => {
     });
 
 
-  // useEffect(() => {
-  //   if (isAuthenticated && redirect === "shipping") {
-  //     navigate(`/${redirect}`, { replace: true });
-  //   } else if (isAuthenticated)
-  //     navigate("/");
-  //   if (error) {
-  //     errMsg(error);
-  //     dispatch(clearErrors());
-  //   }
-
-  // }, [dispatch, isAuthenticated, error, navigate, redirect]);
-
   useEffect(() => {
-    console.log("isAuthenticated:", isAuthenticated);
-    console.log("error:", error);
-    console.log("redirect:", redirect);
-
-    if (isAuthenticated) {
-      navigate(redirect ? `/${redirect}` : "/", { replace: true });
-    }
-
+    if (isAuthenticated && redirect === "shipping") {
+      navigate(`/${redirect}`, { replace: true });
+    } else if (isAuthenticated)
+      navigate("/");
     if (error) {
       errMsg(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, error, navigate]);
+
+  }, [dispatch, isAuthenticated, error, navigate, redirect]);
 
   return (
     <Fragment>
