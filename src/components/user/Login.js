@@ -160,7 +160,6 @@ const Login = () => {
     if (isAuthenticated && redirect === "shipping") {
       navigate(`/${redirect}`, { replace: true });
     } else if (isAuthenticated)
-      dispatch(clearErrors());
       navigate("/");
     if (error) {
       errMsg(error);
