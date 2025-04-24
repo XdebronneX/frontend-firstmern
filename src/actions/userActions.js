@@ -78,7 +78,7 @@ export const registers = (userData) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
-      withCredentials: true, // ✅ Move it outside headers
+      withCredentials: true,
     };
 
     const { data } = await axios.post(
